@@ -1,7 +1,8 @@
 div {
-    width: 600px;
+    width: 900px;
     word-wrap: break-word;
     font-family: verdana;
+    font-size: 20px;
 }
 
 ul {
@@ -18,9 +19,10 @@ ul {
 .topnav a {
     float: left;
     text-align: center;
-    padding: 10px 8px;
+    padding: 5px 5px;
+    margin: 10px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .topnav a:hover {
