@@ -1,0 +1,6 @@
+Songs {display:block; border-bottom:1px solid;}
+Song {font-family: verdana;}
+SongName {display:block; font-size:30px; font-weight:600;}
+Artist {display:block; color:#e642f5; font-size:20px; font-weight:500;}
+Genre {display:block; color:#f57c73; font-size:20px; font-weight:500;}
+Year {display:block; color:#06b8b2; font-size:20px; font-weight:500;}

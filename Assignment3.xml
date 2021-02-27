@@ -1,0 +1,63 @@
+<?xml-stylesheet href="Assignment3.css"?>
+<Songs>
+    <Song>
+        <SongName>Look At Me Now</SongName>
+        <Artist>June and Xenom</Artist>
+        <Genre>Hip Hop/Rap</Genre>
+        <Year>2021</Year>
+    </Song>
+    <Song>
+        <SongName>Economy Class</SongName>
+        <Artist>Key.L and Kafe.Hu</Artist>
+        <Genre>Hip Hop/Rap</Genre>
+        <Year>2020</Year>
+    </Song>
+    <Song>
+        <SongName>Human</SongName>
+        <Artist>Zico</Artist>
+        <Genre>Hip Hop/Rap</Genre>
+        <Year>2019</Year>
+    </Song>
+    <Song>
+        <SongName>Time Machine</SongName>
+        <Artist>Diamond Pistols and Rich Brian</Artist>
+        <Genre>Hip Hop/Rap</Genre>
+        <Year>2020</Year>
+    </Song>
+    <Song>
+        <SongName>When We Were Young</SongName>
+        <Artist>Lost Kings and Norma Jean Martine</Artist>
+        <Genre>EDM</Genre>
+        <Year>2018</Year>
+    </Song>
+    <Song>
+        <SongName>Walk Thru Fire</SongName>
+        <Artist>Vicetone and Meron Ryan</Artist>
+        <Genre>EDM</Genre>
+        <Year>2018</Year>
+    </Song>
+    <Song>
+        <SongName>Try</SongName>
+        <Artist>MitiS and RORY</Artist>
+        <Genre>EDM</Genre>
+        <Year>2021</Year>
+    </Song>
+    <Song>
+        <SongName>Doesn't Matter</SongName>
+        <Artist>Gallant</Artist>
+        <Genre>RnB</Genre>
+        <Year>2018</Year>
+    </Song>
+    <Song>
+        <SongName>2 soon</SongName>
+        <Artist>keshi</Artist>
+        <Genre>RnB</Genre>
+        <Year>2018</Year>
+    </Song>
+    <Song>
+        <SongName>pieces</SongName>
+        <Artist>slchld</Artist>
+        <Genre>RnB</Genre>
+        <Year>2021</Year>
+    </Song>
+</Songs>        
