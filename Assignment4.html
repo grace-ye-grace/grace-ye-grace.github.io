@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <link rel="stylesheet" href ="Assignment4.css">
+    </head>
+    <body>
+        <h1>Joe's Hotdog Stand</h1>
+        <div>
+        <script language="javascript">
+            
+            name = prompt("Name for the order:", "Customer");
+            //Hotdog 3.25, french fries 2.00, drinks 1.50
+            //Prompt for number of hotdogs/french fries/drinks, store in vars
+            hotdogs = parseInt(prompt("Number of hotdogs:", "0"));
+            frenchfries = parseInt(prompt("Number of french fries:", "0"));
+            drinks = parseInt(prompt("Number of drinks:", "0"));
+            
+            //Calculate subtotal (if only prices given are calculated)
+            subtotal = hotdogs*3.25 + frenchfries*2.00 + drinks*1.50;
+            
+            //Implement Joe's special, 10% off for over 20.00 order
+            if (subtotal > 20.00) {
+                discount = subtotal*0.10
+            }
+            else {
+                discount = 0.00;
+            }
+            
+            //Update subtotal with new discount (no discount = minus 0)
+            discountprice = subtotal-discount;
+            
+            //Add MA tax 6.25% to order
+            tax = discountprice*0.0625;
+            finalprice = discountprice+tax;
+            
+            //Print out everything: items ordered, quantity, subtotal, 
+            //discount if applicable, tax, total 
+            
+            document.write(name + "'s Order" + "<br>" + "<br>");
+            document.write("Hotdogs Ordered: " + hotdogs + "<br>");
+            document.write("French Fries Ordered: " + frenchfries + "<br>");
+            document.write("Drinks Ordered: " + drinks + "<br>");
+            document.write("Subtotal: $" + subtotal.toFixed(2) + "<br>");
+            document.write("Discount: $" + discount.toFixed(2) + "<br>");
+            document.write("MA Sales Tax: $" + tax.toFixed(2) + "<br>"+"<br>");
+            document.write("Total: $" + finalprice.toFixed(2) + "<br>");
+            
+        </script>
+    </body>
+</html>
