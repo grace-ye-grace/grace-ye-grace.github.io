@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <link rel="stylesheet" href ="Assignment5.css">
+    </head>
+    <body>
+        <h1>Lucky for Life</h1>
+        <div>
+        <script language="javascript">
+            
+            //Get numbers from user as reference for what numbers win
+            numbers = prompt("The 5 winning numbers (separate with spaces):");
+            lucky = prompt("The 1 lucky winning number:");
+            
+            //////////////////////////////////////////////////////////////////
+            
+            numbers_ns = [0,0,0,0,0];
+            number = numbers.split(" ");     
+            
+            for (i = 0; i < 5; i++) {
+                //Store each number as an int into the array slot
+                numbers_ns[i] = parseInt(number[i]);
+            }
+            
+            //Convert lucky ball to int
+            lucky_int = parseInt(lucky);
+            
+            //////////////////////////////////////////////////////////////////
+            
+            //Find your numbers (random ones)
+            your_numbers_ns = [0,0,0,0,0];
+            your_lucky = 0;
+            //Get your first 5 random numbers
+            for (i = 0; i < 5; i++) {
+                your_numbers_ns[i] = Math.round(Math.random() * 47 + 1);
+            }
+            //Get your random lucky ball number
+            your_lucky = Math.round(Math.random() * 17 + 1);
+            
+            your_numbers = your_numbers_ns.sort(function(a, b){return a-b});
+            
+            //////////////////////////////////////////////////////////////////
+            
+            //Print out regular numbers
+            document.write("First five drawn numbers: ");
+            //Writes each random number you picked
+            for (i = 0; i < 5; i++) {
+                document.write(your_numbers[i] + " ");
+            } 
+            
+            document.write("<br>");            
+            document.write("Lucky ball drawn number: " + your_lucky);
+            document.write("<br>");    
+                   
+            //////////////////////////////////////////////////////////////////
+            
+            //NEW SECTION
+            document.write("<br>");
+            
+            //Print out regular numbers
+            document.write("Five winning numbers: ");
+            //Writes each regular number the user picked
+            for (i = 0; i < 5; i++) {
+                document.write(numbers_ns[i] + " ");
+            }
+            document.write("<br>");
+            //Writes the lucky ball number
+            document.write("Lucky ball number: " + lucky_int + "<br>");
+            
+            //////////////////////////////////////////////////////////////////
+            
+            //NEW SECTION
+            document.write("<br>");
+            
+            //How many matches in the first five
+            first_five = 0;
+            //User provided numbers
+            for (i = 0; i < (numbers_ns.length - 1); i++) {
+                //Your randomly drawn numbers
+                for (i = 0; i < your_numbers.length; i++) {
+                    if (numbers_ns[i] == your_numbers[i]) {
+                        //If a match, increment count
+                        first_five++;
+                    }
+                }
+            }
+            
+            //Match in lucky ball
+            lucky_yesno = false;
+            //Your randomly drawn numbers
+            for (i = 0; i < 6; i++) {
+                if (lucky_int == your_lucky) {
+                    //If a match, change boolean
+                    lucky_yesno = true;
+                }
+            }
+            
+            //////////////////////////////////////////////////////////////////
+            
+            //Print matches
+            document.write("<h2>" + "Matches" + "</h2>");
+            document.write("Five winning numbers: " + first_five + "<br>");
+            document.write("Lucky ball: " + lucky_yesno + "<br>");
+            
+            //////////////////////////////////////////////////////////////////
+            
+            //Payout by each case
+            if((first_five == 5) && (lucky_yesno == true)){
+                document.write("Prize: $7000 a WEEK for LIFE");
+            }
+            else if((first_five == 5) && (lucky_yesno == false)){
+                document.write("Prize: $25000 a YEAR for LIFE");
+            }
+            else if((first_five == 4) && (lucky_yesno == true)){
+                document.write("Prize: $5000");
+            }
+            else if((first_five == 4) && (lucky_yesno == false)){
+                document.write("Prize: $200");
+            }
+            else if((first_five == 3) && (lucky_yesno == true)){
+                document.write("Prize: $150");
+            }
+            else if((first_five == 3) && (lucky_yesno == false)){
+                document.write("Prize: $20");
+            }
+            else if((first_five == 2) && (lucky_yesno == true)){
+                document.write("Prize: $25");
+            }
+            else if((first_five == 2) && (lucky_yesno == false)){
+                document.write("Prize: $3");
+            }
+            else if((first_five == 1) && (lucky_yesno == true)){
+                document.write("Prize: $6");
+            }
+            else if((first_five == 0) && (lucky_yesno == true)){
+                document.write("Prize: $4");
+            }
+            else {
+                document.write("Prize: None");
+            }
+            
+        </script>
+    </body>
+</html>

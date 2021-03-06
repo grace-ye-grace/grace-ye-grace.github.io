@@ -1,0 +1,22 @@
+div {
+    width: 900px;
+    word-wrap: break-word;
+    font-family: verdana;
+    font-size: 30px;
+}
+
+h1 {
+    width: 900px;
+    word-wrap: break-word;
+    font-family: verdana;
+    font-size: 60px;    
+}
+
+h2 {
+    width: 900px;
+    word-wrap: break-word;
+    font-family: verdana;
+    font-size: 50px;
+    font-weight: normal;  
+      
+}
