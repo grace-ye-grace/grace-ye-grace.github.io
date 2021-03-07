@@ -11,10 +11,6 @@
             <input type="text" id="lnum" name="lnum"><br><br>
             <input type="button" value="Evaluate" onclick="printResult();"><br>
         </form>        
-        <div id="first_num"></div>
-        <div id="first_num_arr"></div>
-        <div id="last_num"></div>
-        <div id="last_num_arr"></div>
         <div id="final"></div>
         <script language="javascript">
             function printResult() 
@@ -26,10 +22,6 @@
                 lnum_arr = findFactors(lnum);
                 fnum_sum = sumFactors(fnum_arr);
                 lnum_sum = sumFactors(lnum_arr);
-                document.getElementById("first_num").innerHTML = "First Number: " + fnum + "<br>";
-                document.getElementById("first_num_arr").innerHTML ="Factors: " + fnum_arr + "<br><br>";
-                document.getElementById("last_num").innerHTML ="Second Number: " + lnum + "<br>";
-                document.getElementById("last_num_arr").innerHTML = "Factors: " + lnum_arr + "<br><br>";
                 if ((fnum_sum == lnum) && (lnum_sum == fnum)) {
                     //document.write("Got here");
                     document.getElementById("final").innerHTML = "The numbers: " + fnum + " and " + lnum + " are amicable";
@@ -37,6 +29,8 @@
                 else {
                     document.getElementById("final").innerHTML = "The numbers: " + fnum + " and " + lnum + " are not amicable";
                 }
+                alert("First Number Factors: " + fnum_arr);
+                alert("Second Number Factors: " + lnum_arr);
                 
             }
             
