@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    input:valid {
+       border-color:black
+    }
+
+    input:invalid {
+        border-color: red;
+    }
+</style>
+<title>Jade Delight</title>
+</head>
+
+<body>
+<script language="javascript">
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 4.5),
+	new MenuItem("Sweet and Sour Pork", 6.25),
+	new MenuItem("Shrimp Lo Mein", 5.25),
+	new MenuItem("Moo Shi Chicken", 6.5),
+	new MenuItem("Fried Rice", 2.35)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+
+</script>
+
+<h1>Jade Delight</h1>
+<form>
+
+<p id='fname'>First Name: <input type="text"  name='fname' /></p>
+<p id='lname'>Last Name*:  <input type="text"  name='lname' /></p>
+<p id='street'>Street: <input type="text"  name='street'/></p>
+<p id='city'>City: <input type="text"  name='city'/></p>
+<p id='phone'>Phone*: <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio"  name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio"  name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script language="javascript">
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr><td>";
+	  s += makeSelect("quan" + i, 0, 10);
+	  s += "</td><td>" + menuItems[i].name + "</td>";
+	  s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+	  s += "<td>$<input type='text' name='cost'/></td></tr>";
+  }
+  document.writeln(s);
+  
+  //PART 1
+  
+  function totalChanged(i) {
+	//Get price and quantity, calculate
+  	var total = 0;
+  	var price = menuItems[i].cost;
+  	var quantity = $("select[name='quan"+i+"'] option:selected").val();
+	total = price * quantity;
+	//Get to the input and update the value to the total, round to 2 decimals
+ 	var currNode = $("select[name='quan"+i+"']");
+	var ancestor = currNode.parent().parent();
+	var myNode = ancestor.find("td input[name='cost']");
+	var myInput = myNode.get(0);
+	//Input is now written to the box
+	myInput.value = total.toFixed(2);
+  }
+  
+  function subTotal() {
+	  var subTotalNum = 0;
+	  for (i = 0; i < menuItems.length; i++)
+	  {
+		  //Get to the input and update the value to the subtotal variable
+	   	  var currNode = $("select[name='quan"+i+"']");
+	  	  var ancestor = currNode.parent().parent();
+	  	  var myNode = ancestor.find("td input[name='cost']");
+		  var myInput = myNode.get(0);
+		  myVal = myInput.value;
+		  subTotalNum = subTotalNum + parseFloat(myVal);
+	  }
+	  subTotalNum = subTotalNum.toFixed(2);
+	  //Get to the input and update the value to the subtotal
+	  var subTotalNode = $("input[name='subtotal']");
+	  var mySubTotal = subTotalNode.get(0);
+	  //Input is now written to the box
+	  mySubTotal.value = subTotalNum;
+	  return subTotalNum;
+  }
+  
+  function tax() {
+	  //Get value from subtotal box
+	  var subTotalNode = $("input[name='subtotal']");
+	  var subTotalGet = subTotalNode.get(0);
+	  mySubTotal = subTotalGet.value;
+	  
+	  //Calculate tax amount
+	  var taxNum = 0.0625 * parseFloat(mySubTotal);
+	  taxNum = taxNum.toFixed(2);
+  
+	  //Get to the input and update the value to the tax amount
+	  var taxNode = $("input[name='tax']");
+	  var myTax = taxNode.get(0);
+	  //Input is now written to the box
+	  myTax.value = taxNum;
+	  return taxNum;
+  }
+  
+  function total() {
+	  //Get value from subtotal box
+	  var subTotalNode = $("input[name='subtotal']");
+	  var subTotalGet = subTotalNode.get(0);
+	  mySubTotal = subTotalGet.value;
+  
+	  //Get value from tax box
+	  var taxNode = $("input[name='tax']");
+	  var taxGet = taxNode.get(0);
+	  myTax = taxGet.value;
+	  
+	  //Calculate total amount
+	  var totalNum = parseFloat(mySubTotal) + parseFloat(myTax);
+	  totalNum = totalNum.toFixed(2);
+	  
+	  //Get to the input and update the value to the total amount, 
+	  var totalNode = $("input[name='total']");
+	  var myTotal = totalNode.get(0);
+	  //Input is now written to the box
+	  myTotal.value = totalNum;
+	  return totalNum;
+  
+  }
+  
+  
+  $(document).ready(function(){
+	for (i=0; i< menuItems.length; i++)
+  	{
+		var currNode = $("select[name='quan"+i+"']");
+		var ancestor = currNode.parent().parent();
+		var myNode = ancestor.find("td input[name='cost']");
+		var myInput = myNode.get(0);
+		
+		myInput.value = 0.00;
+		
+  	}
+  	//If there is a change to the form, operate totalChanged function
+  	$('select').change(function(data) {
+		//Update total cost for each item
+		for (i = 0; i < menuItems.length; i++)
+	    {
+			totalChanged(i);
+		}
+		//Update subtotal, tax, and total
+		subTotal();
+		tax();
+		total();
+	});
+  });
+  
+  
+  //PART 2
+  
+  $(document).ready(function() {
+	  //Hide street and city fields
+	  $('#street').hide();
+	  $('#city').hide();
+	  //When radio button clicked, show the fields
+	  $("input[name='p_or_d']").change(function() {
+		  $('#street').toggle();
+		  $('#city').toggle();
+	  });
+  });
+  
+  //PART 3
+  
+  function calculateTime(pickupTrue) {
+	  //Depending on type of order, different finish times
+	  var myNum = 0;
+	  if (pickupTrue) {
+		  myNum = 15;
+	  } else {
+		  myNum = 30;
+	  }
+	  
+	  //Get time
+	  var d = new Date();
+	  var initialHours = d.getHours();
+	  var initialMins = d.getMinutes();
+	  
+	  var totalMins = ((initialHours * 60) + initialMins + myNum);
+	  //Find hours by flooring division by 60
+	  finalHours = parseInt(totalMins / 60);
+	  //Find mins by moding by 60
+	  finalMins = parseInt(totalMins % 60);
+	  //Add the extra zero for minutes under 10
+	  if (finalMins < 10) {
+		  finalMins = "0" + finalMins;
+	  }
+	  
+	  //Return time as a string
+	  return finalHours + ":" + finalMins;
+  }
+  
+  function orderValid() {
+	  var subTotalNum = 0;
+	  for (i = 0; i < menuItems.length; i++)
+	  {
+		  //Get to the input and update the value to the subtotal variable
+	   	  var currNode = $("select[name='quan"+i+"']");
+	  	  var ancestor = currNode.parent().parent();
+	  	  var myNode = ancestor.find("td input[name='cost']");
+		  var myInput = myNode.get(0);
+		  myVal = myInput.value;
+		  subTotalNum = subTotalNum + parseFloat(myVal);
+	  }
+	  //If subtotal is 0, then the person did not buy anything, throw error
+	  if (subTotalNum == 0) {
+		  alert("Please buy at least one item.")
+		  return false;
+	  } else {
+		  return true;
+	  }
+  }
+  
+  function isValidPhoneNumber(inputtxt) {
+	//Check that the phone number is of a valid form
+	var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+	if (inputtxt && inputtxt.match(phoneNum)) {
+	  return true;
+	} else {
+	  return false;
+	}
+  }
+  
+  function nameAndPhoneValid() {
+	//Get values of last name and phone number
+	var lname = $("input[name='lname']");
+	var lnameGet = lname.get(0);
+	myLname = lnameGet.value;
+	var pNum = $("input[name='phone']");
+	var pNumGet = pNum.get(0);
+	mypNum = pNumGet.value;
+	//If last name is invalid, throw error
+	if (!myLname) {
+		alert("Please enter a last name.");
+		return false;
+	}
+	//If phone number is invalid, throw error
+	if (!isValidPhoneNumber(mypNum)) {
+		alert("Please enter a valid phone number.");
+		return false;
+	}
+	return true;
+  }
+  
+  function streetAndCityValid() {
+	//Get values of street and city
+	var street = $("input[name='street']");
+	var streetGet = street.get(0);
+	myStreet = streetGet.value;
+	var city = $("input[name='city']");
+	var cityGet = city.get(0);
+	myCity = cityGet.value;
+	//If street is invalid, throw error
+	if (!myStreet) {
+		alert("Please enter a street name.");
+		return false;
+	}
+	//If city is invalid, throw error
+	if (!myCity) {
+		alert("Please enter a city name.");
+		return false;
+	}
+	return true;
+  }
+  
+  function getFinalOrder(pickupTrue) {
+	  //Store everything in a string of HTML form
+	  var temp = "";
+	  temp += "<p>Thank you for your order.</p><br>";
+	  
+	  for (i = 0; i < menuItems.length; i++)
+	  {
+		  //Get name and quantity
+		  var name = menuItems[i].name;
+	   	  var currNode = $("select[name='quan"+i+"']");
+		  var numGet = currNode.get(0);
+		  myNum = numGet.value;
+		  //If quantity greater than 0 (ordered item), then add to string
+		  if (myNum > 0) {
+			  temp += "<p>Item: "+ name + "</p>";
+			  temp += "<p>Quantity: "+ myNum + "</p>";
+			  temp +="<br>";
+		  }
+	  }
+	  //Add subtotal, tax, total, and time to string
+	  temp +="<br>";
+	  var mySubTotal = subTotal();
+	  temp += "<p>Subtotal: " + mySubTotal + "</p>";
+	  var myTax = tax();
+	  temp += "<p>Tax: " + myTax + "</p>";
+	  var myTotal = total();
+	  temp += "<p>Total: " + myTotal + "</p>";
+	  var myTime = calculateTime(pickupTrue);
+	  temp += "<p>Time Ready: " + myTime + "</p>";
+	  
+	  return temp;
+  }
+  
+  
+  function submitFunc() {
+	  //Check for valid order and fields
+	  if (!orderValid()) {
+		  return;
+	  }
+	  if (!nameAndPhoneValid()) {
+		  return;
+	  }
+	  pickupTrue = true;
+	  if ($('input[type=radio]:checked').val() == "delivery") {
+		  pickupTrue = false;
+		  if (!streetAndCityValid()) {
+			  return;
+		  }
+	  }
+	  
+	  //All validation passed, get values for final printout of order
+	  var timeToReady = calculateTime(pickupTrue);
+	  var finalOrder = getFinalOrder(pickupTrue);
+	  
+	  //Open final order in new page
+	  var newPageOrder = window.open("", "final order");
+      newPageOrder.document.writeln(finalOrder);
+  }
+  
+</script>
+</table>
+<p>Subtotal: 
+   $<input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p>Mass tax 6.25%:
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p>Total: $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "button" value = "Submit Order" onclick="submitFunc();"/>
+
+</form>
+</body>
+</html>
