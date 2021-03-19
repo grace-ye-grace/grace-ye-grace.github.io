@@ -1,0 +1,64 @@
+data = {
+    "songs":[
+            {
+                "name": "Look At Me Now",
+                "artist": "June and Xenom",
+                "genre": "Hip Hop/Rap",
+                "year":"2021"
+            },
+            {
+                "name": "Economy Class",
+                "artist": "Key.L and Kafe.Hu",
+                "genre": "Hip Hop/Rap",
+                "year":"2020"
+            },
+            {
+                "name": "Human",
+                "artist": "Zico",
+                "genre": "Hip Hop/Rap",
+                "year":"2019"
+            },
+            {
+                "name": "Time Machine",
+                "artist": "Diamond Pistols and Rich Brian",
+                "genre": "Hip Hop/Rap",
+                "year":"2020"
+            },
+            {
+                "name": "When We Were Young",
+                "artist": "Lost Kings and Norma Jean Martine",
+                "genre": "EDM",
+                "year":"2018"
+            },
+            {
+                "name": "Walk Thru Fire",
+                "artist": "Vicetone and Meron Ryan",
+                "genre": "EDM",
+                "year":"2018"
+            },
+            {
+                "name": "Try",
+                "artist": "MitiS and RORY",
+                "genre": "EDM",
+                "year":"2021"
+            },
+            {
+                "name": "Doesn't Matter",
+                "artist": "Gallant",
+                "genre": "RnB",
+                "year":"2018"
+            },
+            {
+                "name": "2 soon",
+                "artist": "keshi",
+                "genre": "RnB",
+                "year":"2018"
+            },
+            {
+                "name": "pieces",
+                "artist": "slchld",
+                "genre": "RnB",
+                "year":"2021"
+            }
+        ]
+}
