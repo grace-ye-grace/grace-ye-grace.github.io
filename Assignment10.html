@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<link rel="stylesheet" href ="Assignment10.css">
+		<script>
+			
+		function getInfoBoston() {
+			//Get a request
+			request = new XMLHttpRequest();
+			request.open("GET", "https://api.openweathermap.org/data/2.5/weather?zip=02108,us&appid=b7964d17940e1d0ced78e6efde0423ad", true);
+			
+			request.onreadystatechange = function() {
+				//If the request is ready and is successful, print result
+				if (request.readyState == 4 && request.status == 200) {
+					result = request.responseText;
+					document.getElementById("dataBoston").innerHTML = result;
+					weather = JSON.parse(result);
+				}
+				//If the request is ready but is not successful, print message
+				else if (request.readyState == 4 && request.status != 200) {
+					document.getElementById("dataBoston").innerHTML = "Hmm, something's not right.";
+				}
+				//If the request is not ready, print message
+				else if (request.readyState == 3) {
+					document.getElementById("dataBoston").innerHTML = "Not ready yet!";
+				}
+			}
+			//Send request
+			request.send();
+		}
+		</script>
+	</head>
+
+
+	<body onload="getInfoBoston();">
+		<h1>API Exploration</h1>
+        <div>
+            <h2>API Description/What It Does:</h2>
+            <p>This API is a current weather API. It provides information about the current weather an area of interest by ZIP code. In this case, the area of interest is Boston. </p>
+            <h2>Website Where It Was Found:</h2>
+            <p>openweathermap.org</p>
+            <h2>Options Used For API Request:</h2>
+            <p>The API request option used was the one that called weather information about the city of Boston by ZIP code. </p>
+            <h2>Two Applications Where This API Would Be Helpful:</h2>
+            <p>1) Helpful for people in Boston (or another area) to see the current weather to decide how they should dress for the weather.</p>
+            <p>2) Helpful for people in Boston  (or another area) to see whether the current situation is good for traveling outside.</p>
+        </div><br>
+		<div>Raw Data:</div>
+        <div id="dataBoston"></div><br>		
+	</body>
+</html>
