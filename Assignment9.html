@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div>
+            <!-- Creates a blank div for raw JSON; filled in by JavaScript -->
+            <p>Raw String Song List</p>
+            <div id="rawString"></div>
+        </div>
+        <div>
+            <p>Formatted Song List</p>
+            <form>
+                <!-- Creates a labelled blank dropdown for genre options; filled in by JavaScript -->
+                <label for="filterOptions">Filter by Genre</label>
+                <select id="filterOptions">
+                </select>
+                <!-- Creates two buttons, one for part 3 (display all is the table of all the songs), one for part 4 (filter is the table of songs by genre) -->
+                <input type="button"  value="Filter" onclick="filter();">
+                <input type="button"  value="Display All" onclick="displayAll();">
+            </form>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <!-- Creates headers for columns of table -->
+                        <th>Name</th>
+                        <th>Artist</th>
+                        <th>Genre</th>
+                        <th>Year Released</th>
+                    </tr>
+                </thead>
+                <!-- Creates a blank table body for data of songs; filled in by JavaScript -->
+                <tbody id="songs">
+                </tbody>
+        </div>
+        
+        <script>
+            //Function to do everything
+            $.getJSON("Assignment9.json", function (songList) {
+                //Stringifies JSON and writes it to the document as a raw string
+                var stringVersion = JSON.stringify(songList);
+                document.getElementById('rawString').innerHTML = stringVersion;
+                
+                //Create empty genre list
+                var genreList = [];
+                //Get to the place in HTML the genres and the songs in the table body are located
+                var genres = document.getElementById('filterOptions');
+                var songBody = document.getElementById('songs');
+
+                //For each of the songs in the songlist
+                songList.forEach(function(song){
+                    //For each of the genres in the song
+                    song.genre.forEach(function(value){
+                        //If the genre list does not yet contain this song's genre, push the value of the genre onto the table
+                        if(!genreList.includes(value)) {
+                            genreList.push(value);
+                            var newGenre = "<option value=" + value +">"
+                                + value +"</option>";
+                            genres.insertAdjacentHTML('beforeend', newGenre);
+                        }
+                    });
+                    //Store song info for each song, then push the data onto the table; genre gets a class and is converted to string for later use in helper functions
+                    var songInfoRow = "<tr class=\"song\">" +
+                    "<td>" + song.name + "</td>" +
+                    "<td>" + song.artist + "</td>" +
+                    "<td class='songGenre'>" + song.genre.toString() + "</td>" +
+                    "<td>" + song.year + "</td></tr>";
+                    songBody.insertAdjacentHTML('beforeend', songInfoRow);
+                });
+            });
+            
+            function filter() {
+                //Get the list of genre options in the dropdown, find the current one selected
+                var choices = document.getElementById('filterOptions');
+                var genreValue = choices.value;
+                //For each song genre in the song genre list in the table
+                $("#songs tr td[class='songGenre']").each(function(index) {
+                    //Split by comma (for multiple genres)
+                    var genreList = this.innerText.split(',');
+                    //If the genre selected in the dropdown equals one of the  genre in this song, diplay the row, otherwise don't display
+                    if (genreList.includes(genreValue)) {
+                        this.parentNode.style.display = "table-row";
+                    } else {
+                        this.parentNode.style.display = "none";
+                    }
+                });
+            }
+            
+            function displayAll() {
+                //For all songs in tr with class song (all songs), display
+                $("#songs tr[class='song']").each(function(index) {
+                    this.style.display = "table-row";
+                });
+            
+            }
+        </script>
+    </body>
+</html>
+        
