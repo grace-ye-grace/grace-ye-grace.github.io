@@ -1,0 +1,222 @@
+/* CSS Document */
+/*basic settings*/
+ * {
+        box-sizing: border-box;
+	 	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+ }
+
+body {
+	background-color: #858585;
+	margin: 2% 5%;
+	
+}
+
+h1{
+	font-size: 70px; 
+	margin:auto;
+	margin-bottom: 50px;
+}
+
+h2 {
+	font-size: 50px; 
+}
+
+input[type=text] {
+	min-width: 50vw;
+	width: 100%;
+	padding: 12px 40px;
+	box-sizing: border-box;
+	border: 5px solid #DFDDDD; 
+	font-size:larger;
+}
+
+input[type=submit]{
+	padding: 5px 30px; 
+	margin-top:30px;
+	box-sizing:border-box;
+	border: 3px solid #DFDDDD; 
+	background-color: #DFDDDD; 
+	font-weight: bold;
+	font-size: 30px;
+	margin-bottom: 30px
+}
+
+input[type=submit]:hover {
+	border: 3px solid #DFDDDD; 
+	color: #DFDDDD; 
+	background-color: #000;
+}
+
+button{
+	padding: 5px 30px; 
+	margin-top:30px;
+	box-sizing:border-box;
+	border: 3px solid #DFDDDD; 
+	background-color: #DFDDDD; 
+	font-weight: bold;
+	font-size: 30px;
+	margin-bottom: 30px
+}
+
+button:hover {
+	border: 3px solid #DFDDDD; 
+	color: #DFDDDD; 
+	background-color: #000;
+}
+
+.whiteb {
+	display: inline-block;
+	width:90%;
+	font-size: 30px; 
+	padding: 5px 5% 30px 5%; 
+	box-sizing:border-box;
+	border: 3px solid #000; 
+	background-color: #DFDDDD; 
+	font-weight: bold;
+	margin-top:50px;	
+}
+
+/*style for navigation*/
+.topnav li {
+	display: inline-block; 
+	font-size: 30px; 
+	padding: 5px 20px; 
+	box-sizing:border-box;
+	border: 3px solid #000; 
+	background-color: #DFDDDD; 
+	font-weight: bold ;
+	margin-bottom:10px;
+}
+
+.topnav li:hover {
+	border: 3px solid #333; 
+	color: #DFDDDD; 
+	background-color: #000
+}
+.topnav li a {
+	text-decoration: none; 
+	color: inherit
+}
+
+.logo {
+	margin-top: 20px;
+}
+
+/*style for the Contact Us part*/
+.structure {
+	width:100%;
+	box-sizing: border-box;
+	position:relative; 
+	text-align: center;
+	margin:auto;
+	font-size: 25px;
+}
+
+.under{
+	color: #FFFFFF;
+	background-color: #000000;
+	height: auto;
+	padding: 10px;
+	margin-top: 30px;
+}
+
+.block {
+	border: 5px solid #DFDDDD; 
+	background-color: #858585;
+}
+
+.blockw {
+	border: 5px solid #DFDDDD; 
+	background-color: #DFDDDD;
+	padding: 5px, 30px;
+}
+
+/*simple style for aligning text*/
+.left {
+	text-align: left;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+
+.white{
+	color:#DFDDDD;
+}
+
+.purewhie{
+	color:#FFFFFF;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left-col {
+  width: 25%;
+  display:inline-block;
+}
+
+.right-col {
+  display:inline-block; 
+  width: 74%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.backgroundB {
+	background-color: #000000;
+}
+
+.bg {
+	background-image:url('background.png');
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.centerImg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media screen and (max-width: 991px) {
+/* start of large tablet styles */
+	.blockw{
+		font-size: 28px; 
+	}
+
+}
+
+@media screen and (max-width: 767px) {
+/* start of medium tablet styles */
+	.blockw{
+		font-size: 25px; 
+	}
+}
+
+@media screen and (max-width: 479px) {
+/* start of phone styles */
+	.blockw{
+		font-size: 20px; 
+	}
+}
+
+
+
+
+

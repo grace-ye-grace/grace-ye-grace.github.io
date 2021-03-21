@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <style type="text/css">
+            #slideshow1{
+				height:inherit;
+				text-align: center;
+                background-color: #fff;
+
+			}
+			
+			#slideshow1 img {
+				text-align: center;
+				border: 2vw #fff solid;
+			}
+			
+			#slideshow2{
+				height:inherit;
+				text-align: center;
+				background-color: #fff;
+			}
+			
+			#slideshow2 img {
+				text-align: center;
+				border: 2vw #fff solid;
+			}
+			
+			#slideshow3{
+				height:inherit;
+				text-align: center;
+				background-color: #fff;
+ 
+			}
+			
+			#slideshow3 img {
+				text-align: center;
+				border: 2vw #fff solid;
+			}
+			
+			.tours {
+				background:#000;
+				padding: 5%;
+				border: 5px #000000 solid;
+				color: #E0E0E0;
+			}
+			
+			.tours h3 {
+				text-decoration: underline overline;
+				font-size: 30px;
+				margin-top:10px;
+			}
+			
+			.tours li {
+				font-size: 20px;
+			}
+			
+			.line {
+				background-color: #E0E0E0;
+				height: 0.4vw;
+			}
+			
+			
+        </style>
+        <title> SERVICES | Cicada Tours </title>
+        <meta name="keywords" content="Cicada,Tours,Services,Boston">
+        <link rel="stylesheet" href ="Midterm.css">
+    </head>
+
+<body class ="bg">
+	<div class="topnav left backgroundB center">
+		<div>
+			<a href="Midterm1.html"><img src="Logo.png" alt="Cicada Tours" width="300" class ="logo"></a>		
+		</div>
+		<ul>
+			<li><a href="Midterm1.html">Home</a></li>
+			<li><a href="Midterm2.html">About</a></li>
+			<li><a href="Midterm3.html">Locations</a></li>
+			<li><a href="Midterm4.html">Services</a></li>
+			<li><a href="Midterm5.html">Schedule a Tour</a></li>
+			<li><a href="Midterm6.html">Contact</a></li>
+			<li><a href="Midterm7.html">Testimonials</a></li>
+		</ul>
+	</div>
+	<br>
+
+	<div class="tours">
+		<h1>Services</h1>
+		<div class = "line">&nbsp;</div>
+		<h3>College Tours</h3>
+		<ul>
+			<li>Boston University</li>
+			<li>Northeastern University</li>
+			<li>Berklee College of Music</li>
+		</ul>
+		<br>
+		<div id="slideshow1">
+			<img class="s1 centerImg" src="BU.png" alt="BU" width="70%" style="text-align: center">
+			<img class="s1 centerImg" src="NEU.png" alt="NEU" width="70%">
+			<img class="s1 centerImg" src="Berklee.png" alt="Berklee" width="70%">
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<div class = "line">&nbsp;</div>
+		
+		
+
+		<h3>Food Tours</h3>
+		<ul>
+			<li>ChaTime</li>
+			<li>Dumpling Cafe</li>
+			<li>Mike's Pastries</li>
+		</ul>
+		<br>
+		<div id="slideshow2">
+			<img class="s2 centerImg" src="Chatime.png" alt="ChaTime" width="70%">
+			<img class="s2 centerImg" src="Dumpling.png" alt="Dumpling Cafe" width="70%">
+			<img class="s2 centerImg" src="Mikes.png" alt="Mike's Pastries" width="70%">
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<div class = "line">&nbsp;</div>
+		
+
+		<h3>Best of Boston Tours</h3>
+		<ul>
+			<li>New Balance Headquarters</li>
+			<li>Fenway Park</li>
+			<li>House of Blues</li>
+		</ul>
+		<br>
+		<div id="slideshow3">
+			<img class="s3 centerImg" src="NBHQ.png" alt="New Balance Headquarters" width="70%">
+			<img class="s3 centerImg" src="Fenway.png" alt="Fenway" width="70%">
+			<img class="s3 centerImg" src="HouseOfBlues.png" alt="House of Blues" width="70%">
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<div class = "line">&nbsp;</div>
+		
+	</div>
+
+	<script language="javascript">
+
+		var index1 = 0;
+		var index2 = 0;
+		var index3 = 0;
+		runSlides1();
+		runSlides2();
+		runSlides3();
+
+		function runSlides1()
+		{
+			var i;
+			var slides = document.getElementsByClassName("s1");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";  
+			}
+			index1++;
+			if (index1 > slides.length) {index1 = 1}    
+			slides[index1-1].style.display = "block";  
+			setTimeout(runSlides1, 2000);
+		}
+
+		function runSlides2()
+		{
+			var i;
+			var slides = document.getElementsByClassName("s2");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";  
+			}
+			index2++;
+			if (index2 > slides.length) {index2 = 1}    
+			slides[index2-1].style.display = "block";  
+			setTimeout(runSlides2, 2000);
+		}
+
+		function runSlides3()
+		{
+			var i;
+			var slides = document.getElementsByClassName("s3");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";  
+			}
+			index3++;
+			if (index3 > slides.length) {index3 = 1}    
+			slides[index3-1].style.display = "block";  
+			setTimeout(runSlides3, 2000);
+		}
+	</script>
+
+	<div class = "under">
+		<div>Boston and Beyond</div>
+		<div> Cicada Tours &copy;</div>
+	</div>
+</body>
+</html>

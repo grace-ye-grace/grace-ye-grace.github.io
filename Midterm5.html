@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <style>
+      .dropbtn {
+        background-color: #666666;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropbtn:hover, .dropbtn:focus {
+        background-color: #424242;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown a:hover {background-color: #ddd;}
+
+      .show {display: block;}
+      
+      #content {
+          width: 100%;
+          margin: auto;
+          background-color: #000;
+          padding: 5%;
+          background-image: url('map.png');
+          background-repeat: no-repeat;
+          background-position-y: bottom;
+          background-position-x: right;
+          background-size:contain;
+      }
+      #home h1 {
+          text-decoration: underline;
+      }
+  </style>
+<title> Cicada Tours - Schedule Tour </title>
+<link rel="stylesheet" href ="Midterm.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script language="javascript">
+
+function valueOfOne(i) //function to get cost for one item
+{
+	var total = 0;
+	var price = tourItems[i].cost;
+	var quantity = $("select[name='quan"+i+"'] option:selected").val();
+	total = price * quantity;
+
+	var currbox = $("select[name='quan"+i+"']");
+	var a = currbox.parent().parent(); //brings you up to table header
+	var p = a.find("td input[name='cost']");
+	var result = p.get(0);
+	//value of i is now:
+	result.value = total.toFixed(2);
+}
+
+function subTotal() //get and display subtotal
+{
+	stotal = 0;
+	for (i = 0; i < tourItems.length; i++)
+	{
+		var price = tourItems[i].cost;
+		var quantity = $("select[name='quan"+i+"'] option:selected").val();
+		stotal += (price * quantity);
+	}
+
+	var pnode = $("input[name='subtotal']");
+	var result = pnode.get(0);
+	result.value = stotal.toFixed(2);
+}
+
+function finalTotal() //0.0625 - MA tax
+{
+	var snode = $("input[name='subtotal']");
+	var result = snode.get(0);
+	var tax = result.value * 0.0625;
+	var ftotal = result.value * 1.0625;
+	var tnode = $("input[name='tax']");
+	var result1 = tnode.get(0);
+	result1.value = tax.toFixed(2);
+	var fnode = $("input[name='total']");
+	var result2 = fnode.get(0);
+	result2.value = ftotal.toFixed(2);
+}
+
+
+$(document).ready(function()
+{
+	for (i = 0; i < tourItems.length; i++)
+	{
+		var currbox = $("select[name='quan"+i+"']");
+		var a = currbox.parent().parent(); //brings you up to table header
+		var p = a.find("td input[name='cost']");
+		var result = p.get(0);
+	}
+
+	$('select').change(function(data) //every time selector changes
+	{
+		for (i = 0; i < tourItems.length; i++)
+		{
+			valueOfOne(i);
+		}
+
+		subTotal();
+		finalTotal();
+	});
+});
+
+//PART 1: validateForm(), confirmOrder(), and isANumber()
+function validateForm()
+{
+	var empt1 = document.forms["form1"]["lname"].value;
+	if (empt1 == "" || empt1 == null)
+	{
+		alert("Last name has not been filled out.");
+		return false;
+	}
+	else
+	{
+		var empt2 = document.forms["form1"]["email"].value;
+		if (validateEmail(empt2) == false || empt2 == "")
+		{
+			alert("Enter a valid email");
+			return false;
+		}
+		else
+		{
+			var fnode = $("input[name='total']");
+			var result2 = fnode.get(0);
+			var famount = result2.value;
+			if (famount > 0)
+			{
+        var empt3 = document.forms["form1"]["fname"].value;
+        if (empt3 == "" || empt3 == null)
+        {
+          alert("First name has not been filled out.");
+          return false;
+        }
+        else
+        {
+          var empt4 = document.forms["form1"]["datepicker"].value;
+          if (empt4 == "")
+          {
+            alert("You must a pick a date for your tours.");
+            return false;
+          }
+          else
+          {
+            var empt5 = document.forms["form1"]["location"].value;
+            if (empt5 == "")
+            {
+              alert("You must pick a starting location for the tour.");
+            }
+            else
+            {
+              confirmOrder();
+      				return true;
+            }
+          }
+        }
+			}
+			else
+			{
+				alert("Error: order not placed!");
+				return false;
+			}
+		}
+	}
+}
+
+function validateEmail(email)
+{
+    //email validation regex taken from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+    const eRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return eRegex.test(String(email).toLowerCase());
+}
+
+function confirmOrder() //function to finish order
+{
+	var snode = $("input[name='total']");
+	var result = snode.get(0);
+	alert("Thank you for reserving a Cicada Tour! Your total is $" + result.value + ".");
+}
+
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<script language="javascript">
+
+function TourItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+tourItems = new Array(
+	new TourItem("Best of Boston Tour", 80.00),
+	new TourItem("Food Tour, with samples", 120.00),
+	new TourItem("Colleges of Boston Tour", 80.00),
+	new TourItem("VIP Cicada Tour", 500.00),
+	new TourItem("Ultra VIP Cicada Tour into Space", 10000.00)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>";
+	return t;
+}
+
+$(function() {
+  $("#datepicker").datepicker();
+});
+</script>
+
+<body class ="bg">
+	<div class="topnav left backgroundB center">
+		<div>
+			<a href="Midterm1.html"><img src="Logo.png" alt="Cicada Tours" width="300" class ="logo"></a>		
+		</div>
+		<ul>
+			<li><a href="Midterm1.html">Home</a></li>
+			<li><a href="Midterm2.html">About</a></li>
+			<li><a href="Midterm3.html">Locations</a></li>
+			<li><a href="Midterm4.html">Services</a></li>
+			<li><a href="Midterm5.html">Schedule a Tour</a></li>
+			<li><a href="Midterm6.html">Contact</a></li>
+			<li><a href="Midterm7.html">Testimonials</a></li>
+		</ul>
+	</div>
+	<br>
+    <div id="content" class="white">
+        <h1 class="white">Schedule a Tour</h1>
+        <form name="form1" onsubmit="validateForm()" action="" method="post">
+
+        <p>First Name*: <input type="text"  name='fname' /></p>
+        <p>Last Name*:  <input type="text"  name='lname'/></p>
+        <p>Date*: <input type="text" name='datepicker' id="datepicker"></p>
+        <div class="dropdown">
+          <button type="button" onclick="locationDropdown()" class="dropbtn">Choose Starting Location</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#" id="framingham">Framingham</a>
+            <a href="#" id="boston">Boston</a>
+            <a href="#" id="cambridge">Cambridge</a>
+          </div>
+        </div>
+        <script language="javascript">
+
+        function locationDropdown()
+        {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+
+        var el = document.getElementById('framingham');
+        el.onclick = selectFramingham;
+
+        var el2 = document.getElementById('boston');
+        el2.onclick = selectBoston;
+
+        var el3 = document.getElementById('cambridge');
+        el3.onclick = selectCambridge;
+
+        function selectFramingham()
+        {
+          var pnode = $("input[name='location']");
+        	var result = pnode.get(0);
+        	result.value = "Framingham";
+          return false;
+        }
+
+        function selectBoston()
+        {
+          var pnode = $("input[name='location']");
+        	var result = pnode.get(0);
+        	result.value = "Boston";
+          return false;
+        }
+
+        function selectCambridge()
+        {
+          var pnode = $("input[name='location']");
+        	var result = pnode.get(0);
+        	result.value = "Cambridge";
+          return false;
+        }
+        </script>
+        <input type="text" name="location"/>
+        <p>Email*: <input type="text"  name='email'/></p>
+        <p><EM>NOTE: All tours depart the selected location at 2PM. Normal tours end
+           at 4PM, while VIP Tours end at 7PM.</EM></p>
+        <br>
+        <table border="0" cellpadding="3">
+          <tr>
+            <th>Number of People</th>
+            <th>Tour Name</th>
+            <th>Cost per Person</th>
+            <th>Total Cost</th>
+          </tr>
+        <script language="javascript">
+
+          var s = "";
+          for (i=0; i< tourItems.length; i++)
+          {
+        	  s += "<tr><td>";
+        	  s += makeSelect("quan" + i, 0, 10);
+        	  s += "</td><td>" + tourItems[i].name + "</td>";
+        	  s += "<td> $ " + tourItems[i].cost.toFixed(2) + "</td>";
+        	  s += "<td>$<input type='text' name='cost'/></td></tr>";
+          }
+          document.writeln(s);
+
+        </script>
+        </table>
+        <p>Subtotal:
+           $<input type="text"  name='subtotal' id="subtotal" />
+        </p>
+        <p>Mass tax 6.25%:
+          $ <input type="text"  name='tax' id="tax" />
+        </p>
+        <p>Total: $ <input type="text"  name='total' id="total" />
+        </p>
+
+        <input type = "submit" value = "Book Tours" />
+
+        </form>
+    </div>
+    <div class = "under">
+        <div>Boston and Beyond</div>
+        <div> Cicada Tours &copy;</div>
+    </div>
+
+</body>
+</html>

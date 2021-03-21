@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>  CONTACT | Cicada Tours  </title>
+    <meta name="keywords" content="Cicada,Tours,Contact,Boston">
+    <link rel="stylesheet" href ="Midterm.css">
+	<style>
+		#bordered-form { 
+			background-color: #000000;
+			width:100%;
+			padding: 1%;
+		}
+		
+		h1 {
+			margin-bottom: auto;
+			background-color: #000;
+			color: #FFFFFF;
+			padding-top:2%;
+			padding-left: 3%;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body class = "bg">
+<div class="topnav left backgroundB center">
+	<div>
+		<a href="Midterm1.html"><img src="Logo.png" alt="Cicada Tours" width="300" class ="logo"></a>		
+	</div>
+	<ul>
+		<li><a href="Midterm1.html">Home</a></li>
+		<li><a href="Midterm2.html">About</a></li>
+		<li><a href="Midterm3.html">Locations</a></li>
+		<li><a href="Midterm4.html">Services</a></li>
+		<li><a href="Midterm5.html">Order</a></li>
+		<li><a href="Midterm6.html">Contact</a></li>
+		<li><a href="Midterm7.html">Testimonials</a></li>
+	</ul>
+</div>
+	
+
+	<div class="structure backgroundB">
+		<h1 class="left">Contact US</h1>
+		<form action="#" method="post" >
+			<table id="bordered-form" cellpadding="0" cellspacing ="15">
+				<tr>
+					<th class="block"><strong>Name</strong></th>
+					<th><input type="text" name="name" id="the_name" required="1"></th>
+				</tr>
+				<tr>
+					<th class="block"><strong>*Email Adress</strong></th>
+					<th><input type="text" name="email" id="the_email" required="1"></th>
+				</tr>
+				<tr>
+					<th  class="block"><strong>Where are you interested</strong></th>
+					<th class="blockw left" style="padding:1% 0% 1% 5%">
+						<input type="checkbox" name="interest" value="archi">Boston<br>
+						<input type="checkbox" name="interest" value="FA">Cambridge<br>
+						<input type="checkbox" name="interest" value="Design">Framingham<br>
+					</th>
+				</tr>
+				<tr>
+					<th  class="block"><strong>Business <br> corporation</strong></th>
+					<th class="blockw left" style="padding:1% 0% 1% 5%">
+						<input type ="radio" name="busi" value="1">Yes
+						<input type ="radio" name="busi" value="0">No
+					</th>
+				</tr>
+			</table>	
+			<input type = "submit" value = "Submit" onclick = "return valid()">
+		</form>
+	</div>
+<br>
+
+
+<div class = "under">
+	<div>CATCHPHRASE FROM COMPANY</div>
+	<div> Cicada Tours &copy;</div>
+</div>
+
+<script language = "javascript">
+	// submit only if the email if valid
+	function validEmail(){
+		if(validateEmail(document.getElementById('the_email').value)){
+			return true;
+		} else{ 
+			document.getElementById('the_email').value = "Email not valid";
+			return false;
+		}
+	}
+
+	function validateEmail(email) { 
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	} 
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <title> LOCATIONS | Cicada Tours </title>
+        <meta name="keywords" content="Cicada,Tours,Locations,Boston">
+        <link rel="stylesheet" href ="Midterm.css">
+    	<style>
+    		.locations {
+    			border: 5px #000000 solid;
+    			padding: 5%;
+    			background-color: #000;
+    		}
+    		
+    		.locations th {
+    			font-size: 30px;
+    		}
+    	</style>
+        <script>
+            $(document).ready(function(){;
+                $("button").click(function(){
+                    $("#map1").fadeIn(1000);
+                    $("#map2").fadeIn(1000);
+                    $("#map3").fadeIn(1000);
+                });
+            });
+        </script>
+    </head>
+
+    <body class = "bg">
+        <div class="topnav left backgroundB center">
+        	<div>
+        		<a href="Midterm1.html"><img src="Logo.png" alt="Cicada Tours" width="300" class ="logo"></a>		
+        	</div>
+        	<ul>
+        		<li><a href="Midterm1.html">Home</a></li>
+        		<li><a href="Midterm2.html">About</a></li>
+        		<li><a href="Midterm3.html">Locations</a></li>
+        		<li><a href="Midterm4.html">Services</a></li>
+        		<li><a href="Midterm5.html">Schedule a Tour</a></li>
+        		<li><a href="Midterm6.html">Contact</a></li>
+        		<li><a href="Midterm7.html">Testimonials</a></li>
+        	</ul>
+        </div>
+        <br>
+
+        <div class="locations">
+            <h1 class = "white">Locations</h1>
+            <table style="width:100%">
+                <tr>
+                    <td><img id="map1" src="Boston.png" alt="Boston" width=100% style="display:none;"></td>
+                    <td><img id="map2" src="Cambridge.png" alt="Cambridge" width=100% style="display:none;"></td>
+                    <td><img id="map3" src="Framingham.png" alt="Framingham" width=100% style="display:none;"></td>
+                </tr>
+        		<tr class = "white">
+                    <th>Boston</th>
+                    <th>Cambridge</th>
+                    <th>Framingham</th>
+        		</tr>
+            </table>
+            <button>Click to see maps</button><br><br>
+        </div>    
+            
+        <div class = "under">
+        	<div>Boston and Beyond</div>
+        	<div> Cicada Tours &copy;</div>
+        </div>
+    
+    </body>
+</html>
